@@ -45,7 +45,6 @@ public class J2SSHTest {
                 @Override
                 public boolean verifyHost(String arg0, SshPublicKey arg1)
                         throws TransportProtocolException {
-                    // TODO Auto-generated method stub
                     return true;
                 }
             });
