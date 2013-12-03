@@ -25,34 +25,35 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class J2SSHTest {
+
     private static Object lock = new Object();
-    public static   void main(String[] args) {
+
+    public static void main(String[] args) {
         //ִ��cmd
         runCmd();
-        
+
     }
-    
-    public static  synchronized  void runCmd(){
+
+    public static synchronized void runCmd() {
         SshClient ssh = new SshClient();
         PasswordAuthenticationClient authentication = new PasswordAuthenticationClient();
         authentication.setUsername("thinkit");
         authentication.setPassword("TBNR$0987");
         try {
 //            ssh.connect("192.168.94.254", 22, new HostsKeyVerification());
-            ssh.connect("192.168.14.213", 22,new HostKeyVerification(){
+            ssh.connect("192.168.14.213", 22, new HostKeyVerification() {
                 @Override
                 public boolean verifyHost(String arg0, SshPublicKey arg1)
-                                throws TransportProtocolException {
-                        // TODO Auto-generated method stub
-                        return true;
-                }});
+                        throws TransportProtocolException {
+                    // TODO Auto-generated method stub
+                    return true;
+                }
+            });
             if (ssh.authenticate(authentication) == AuthenticationProtocolState.COMPLETE) {
-                
-                
+
 //                ScpClient scp =ssh.openScpClient();
-               
                 SessionChannelClient session = ssh.openSessionChannel();
-                
+
                 // session.setEnvironmentVariable("TERM", "linux");
                 // if (client.requestPseudoTerminal("vt100", 120, 400, 0, 0,
                 // "")) {
@@ -60,7 +61,7 @@ public class J2SSHTest {
 //                session.executeCommand("cd /home/thinkit/huawei_test;sh hwrun.sh /home/thinkit/huawei_voice/v3 /home/thinkit/huawei_voice/r3 /home/thinkit/huawei_voice/v3.list");
 //               session.executeCommand("pwd;ls -al");
                 session.executeCommand("pwd;cd /home/thinkit/huawei_test;sh hwrun.sh /home/thinkit/huawei_voice/v8 /home/thinkit/huawei_voice/r8 /home/thinkit/huawei_voice/v8.list");
-              
+
                 BufferedReader in = new BufferedReader(new InputStreamReader(session.getInputStream()));
                 BufferedReader err = new BufferedReader(new InputStreamReader(session.getStderrInputStream()));
                 String line;
@@ -74,7 +75,6 @@ public class J2SSHTest {
                 if (session != null) {
                     session.close();
                 }
-
 
 //                if (session.startShell()) {
 //                    OutputStream writer = session.getOutputStream();
