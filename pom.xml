@@ -16,9 +16,9 @@ language governing permissions and limitations under the License. -->
     <modelVersion>4.0.0</modelVersion>
     <packaging>war</packaging>
 
-    <name>HuaWeiInterface</name>
+    <name>RecognitionInterface</name>
     <groupId>com.thinkit</groupId>
-    <artifactId>HuaWeiInterface</artifactId>
+    <artifactId>RecognitionInterface</artifactId>
     <version>0.0.1</version>
     <build>
         <plugins>
@@ -62,6 +62,22 @@ language governing permissions and limitations under the License. -->
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.4.3</version>
+                <configuration>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
         </plugins>
 
     </build>
@@ -69,6 +85,7 @@ language governing permissions and limitations under the License. -->
         <cxf.version>2.6.2</cxf.version>
         <spring.version>3.1.2.RELEASE</spring.version>
         <slf4j.version>1.7.1</slf4j.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
         <dependency>
@@ -170,6 +187,13 @@ language governing permissions and limitations under the License. -->
             <artifactId>c3p0</artifactId>
             <version>0.9.1.2</version>
         </dependency>
+        <!--添加dom4j的依赖-->
+        <dependency>
+            <groupId>maven</groupId>
+            <artifactId>dom4j</artifactId>
+            <version>1.7-20060614</version>
+        </dependency>
+        
     </dependencies>
 
 </project>

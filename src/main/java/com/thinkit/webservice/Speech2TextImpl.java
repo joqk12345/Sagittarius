@@ -21,10 +21,11 @@ import java.util.logging.Level;
 public class Speech2TextImpl implements Speech2Text {
     //
     public static final String EVNPath = "/home/thinkit/huawei_test/";
-    //212ÉÏÃæµÄÂ·¾¶
+    public static final String EVNPath_2 = "/home/thinkit/Recognition_Offline/"; 
+    //212é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿé“°å‡¤æ‹·é”Ÿï¿½
     public static final String EVNPath1 = "/home/thinkit/Huawei_Recognition_Offline/";
     
-    //±äÎª³ÉÔ±±äÁ¿·½Ê½
+    //é”Ÿæ–¤æ‹·ä¸ºé”Ÿæ–¤æ‹·å‘˜é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·å¼
     protected volatile Process process;
 //    protected  Process process;
 
@@ -36,16 +37,16 @@ public class Speech2TextImpl implements Speech2Text {
 	public void speech2Text(String voiceFilePath, String resultFilePath,String grammarFilePath, AnaParams params,List<SpeechPojo> speechList) 
     {
 		String  listPath = "";
-		//1.1ÀàĞÍ¼ì²é
+		//1.1é”Ÿæ–¤æ‹·é”Ÿé…µç¡·æ‹·é”Ÿï¿½
 		if(null!=voiceFilePath||!"".equals(voiceFilePath)&&null!=resultFilePath||!"".equals(resultFilePath)&&speechList.size()>0){
-		//1.2×ªÒålist ĞÎ³ÉlistÎÄ¼ş  ºÍ  ÏÂÒ»²½²ÎÊı	
+		//1.2è½¬é”Ÿæ–¤æ‹·list é”Ÿè½¿ç­¹æ‹·listé”Ÿä¾¥ç¡·æ‹·  é”Ÿæ–¤æ‹·  é”Ÿæ–¤æ‹·ä¸€é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·	
 			listPath = generateListFile(voiceFilePath.trim(),speechList);
-			//1.3Ö´ĞĞshellÃüÁîÍê³É²Ù×÷  ÕâÒ»¿éÏÈĞ´ËÀÁË  Ò»´ÎÖ´ĞĞ
+			//1.3æ‰§é”Ÿæ–¤æ‹·shellé”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·åˆ¹é”Ÿæ–¤æ‹·é”Ÿï¿½ é”Ÿæ–¤æ‹·ä¸€é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·å†™é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·  ä¸€é”Ÿæ–¤æ‹·æ‰§é”Ÿæ–¤æ‹·
 			if(!"".equals(listPath)){
 				
-				String cmd ="cd /home/thinkit/Huawei_Recognition_Offline/; sh hwrun.sh "+voiceFilePath+" "+resultFilePath+" "+listPath;
+				String cmd ="cd /home/thinkit/Recognition_Offline/; sh hwrun.sh "+voiceFilePath+" "+resultFilePath+" "+listPath;
 //				String cmd ="sh hwrun.sh "+voiceFilePath+" "+resultFilePath+" "+listPath;;
-                logger.info("Ö´ĞĞÃüÁî¼ÓÉÏ²ÎÊı"+cmd);
+                logger.info("åœ¨æ‰§è¡Œçš„å‘½ä»¤"+cmd);
 				this.runShell(cmd);
 			}
 		}
@@ -55,8 +56,8 @@ public class Speech2TextImpl implements Speech2Text {
 //        if (null!=voiceFilePath|| !"".equals(voiceFilePath)&&null!=resultFilePath || !"".equals(resultFilePath) && speechList.size() > 0) {
 //            int i = 0;
 //            for (SpeechPojo pojo : speechList) {
-//                logger.info("µÚ" + i + "ÌõÓïÒô");
-//                //Ö´ĞĞµ¥ÌôÓïÒô×ªÒå·½·¨
+//                logger.info("é”Ÿæ–¤æ‹·" + i + "é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·");
+//                //æ‰§é”Ÿå«ç¢‰æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·è½¬é”Ÿè—‰æ–¹é”Ÿæ–¤æ‹·
 //                speech2oneText(voiceFilePath, resultFilePath, pojo);
 //            }
 //        }
@@ -67,17 +68,17 @@ public class Speech2TextImpl implements Speech2Text {
         return null;
     }
 
-    //¸ºÔğÖ»Ö´ĞĞµ¥µ÷ÓïÒô
+    //é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·åªæ‰§é”Ÿå«ç¢‰æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
     private void speech2oneText(String voiceFilePath, String resultFilePath, SpeechPojo speechPo) {
         String pojoPath = "";
         if (null != voiceFilePath || !"".equals(voiceFilePath) && null != resultFilePath || !"".equals(resultFilePath)) {
-            //1.½«Ò»Ìõ×ª»»³ÉÒ»¸öÎÄ¼ş
+            //1.é”Ÿæ–¤æ‹·ä¸€é”Ÿæ–¤æ‹·è½¬é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·ä¸€é”Ÿæ–¤æ‹·é”Ÿä¾¥ç¡·æ‹·
             pojoPath = generatePoJoFile(voiceFilePath, speechPo);
-            //2.Ö´ĞĞshellÃüÁî
+            //2.æ‰§é”Ÿæ–¤æ‹·shellé”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
             if (!"".equals(pojoPath)) {
-                String cmd = "cd /home/thinkit/Huawei_Recognition_Offline/; sh hwrun.sh " + voiceFilePath + " "+resultFilePath+" "+pojoPath;
+                String cmd = "cd /home/thinkit/Recognition_Offline/; sh hwrun.sh " + voiceFilePath + " "+resultFilePath+" "+pojoPath;
 //				String cmd ="sh hwrun.sh "+voiceFilePath+" "+resultFilePath+" "+listPath;;
-                logger.info("Ö´ĞĞÃüÁî¼ÓÉÏ²ÎÊı" + cmd);
+                logger.info("æ‰§é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·å–œé”Ÿæ–¤æ‹·é”Ÿï¿½" + cmd);
                 this.runShell(cmd);
             }
         }
@@ -153,7 +154,7 @@ public class Speech2TextImpl implements Speech2Text {
 					}catch(Exception e){
 //						log(e);
                         e.printStackTrace();
-						logger.debug("½ÓÊÕÈÕÖ¾³ö´í£¬ÍÆ³öÈÕÖ¾½ÓÊÕ");
+						logger.debug("é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·å¿—é”Ÿæ–¤æ‹·é”Ÿï¿½é”Ÿç‹¡ç­¹æ‹·é”Ÿæ–¤æ‹·å¿—é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·");
 					}
 				}
 			},"one").start();
@@ -171,14 +172,14 @@ public class Speech2TextImpl implements Speech2Text {
 					} catch (Exception e) {
 //							log(e);
                             e.printStackTrace();
-							logger.debug("½ÓÊÕÈÕÖ¾³ö´í£¬ÍÆ³öÈÕÖ¾½ÓÊÕ");
+							logger.debug("é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·å¿—é”Ÿæ–¤æ‹·é”Ÿï¿½é”Ÿç‹¡ç­¹æ‹·é”Ÿæ–¤æ‹·å¿—é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·");
 						}
 				}
 			},"error").start();
 //            InputStream shellIn = process.getInputStream(); // this captures the output from the command
             int shellExitStatus = 0;
             try {
-                //µÈ´ı³ÌĞò½á¹û
+                //é”Ÿé¥ºè¾¾æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿï¿½
                 shellExitStatus = process.waitFor();
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -208,10 +209,10 @@ public class Speech2TextImpl implements Speech2Text {
        
     }
 
-    //Õë¶Ôµ¥¸öpojoĞÎ³ÉÎÄ¼ş
+    //é”Ÿæ–¤æ‹·ç¼˜é”Ÿæ–¤æ‹·é”Ÿçµ§ojoé”Ÿè½¿ç­¹æ‹·é”Ÿä¾¥ç¡·æ‹·
     private String generatePoJoFile(String voiceFilePath, SpeechPojo speechPojo) {
-		//Ä¿Ç°Ö»Õë¶ÔlinuxÏµÍ³
-        //´æ·ÅlistµÄÎÄ¼ş
+		//ç›®å‰åªé”Ÿæ–¤æ‹·é”Ÿçµ£inuxç³»ç»Ÿ
+        //é”Ÿæ–¤æ‹·é”Ÿçµ£isté”Ÿæ–¤æ‹·é”Ÿä¾¥ç¡·æ‹·
         logger.info(voiceFilePath + ".list");
         String path = voiceFilePath + "/" + speechPojo.getSpeechId() + ".list";
 //		String path = "";
@@ -245,10 +246,10 @@ public class Speech2TextImpl implements Speech2Text {
         return null;
     }
 
-    //Õë¶ÔlistĞÎ³ÉÎÄ¼ş
+    //é”Ÿæ–¤æ‹·é”Ÿçµ£isté”Ÿè½¿ç­¹æ‹·é”Ÿä¾¥ç¡·æ‹·
     private String generateListFile(String voiceFilePath, List<SpeechPojo> speechList) {
-		//Ä¿Ç°Ö»Õë¶ÔlinuxÏµÍ³
-        //´æ·ÅlistµÄÎÄ¼ş
+		//ç›®å‰åªé”Ÿæ–¤æ‹·é”Ÿçµ£inuxç³»ç»Ÿ
+        //é”Ÿæ–¤æ‹·é”Ÿçµ£isté”Ÿæ–¤æ‹·é”Ÿä¾¥ç¡·æ‹·
         logger.info(voiceFilePath + ".list");
         String path = voiceFilePath + ".list";
 //		String path = "";
@@ -301,7 +302,7 @@ public class Speech2TextImpl implements Speech2Text {
 		
 		
      String separator = File.separator;
-     logger.info("linux ÏµÍ³µÄ·Ö¸ô·û:"+separator);
+     logger.info("linux ç³»ç»Ÿé”Ÿä¾¥åˆ†é©æ‹·é”Ÿæ–¤æ‹·:"+separator);
      // create a new array of 2 strings
      String[] cmdArray = new String[9];
 
@@ -334,7 +335,7 @@ public class Speech2TextImpl implements Speech2Text {
      if(dir.exists()){
      logger.info("dir"+dir);
      }else{
-     logger.info("²»´æÔÚÄ¿Â¼£ºdir"+dir);
+     logger.info("é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·ç›®å½•é”Ÿæ–¤æ‹·dir"+dir);
      }
      // create a process and execute cmdArray and currect environment
      Process process = Runtime.getRuntime().exec(cmdArray, null, dir);
@@ -366,7 +367,7 @@ public class Speech2TextImpl implements Speech2Text {
      e1.printStackTrace();
      }
      try {
-     //µÈ´ı½ø³Ì½áÊø
+     //é”Ÿé¥ºè¾¾æ‹·é”Ÿæ•™æ–¤æ‹·é”Ÿæ–¤æ‹·
      process2.waitFor();
      } catch (InterruptedException e) {
      e.printStackTrace();

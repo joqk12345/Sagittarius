@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<grammar version="1.0"
+         mode="continuous"
+         root="service"
+         xmlns="http://www.w3.org/2001/06/grammar"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://www.w3.org/2001/06/grammar 
+         http://www.w3.org/TR/speech-grammar/grammar.xsd">
+
+    <rule id="servcie">
+        <one-of>
+            <item><ruleref uri="#keyword"/></item>
+        </one-of>
+    </rule>
+    
+    <rule id="keyword">
+        <one-of>
+            <item><ruleref uri="#dirtyword"/></item>
+            <item><ruleref uri="#regularword"/></item>
+            <item><ruleref uri="#otherword"/></item>
+        </one-of>
+    </rule>
+     
+     <rule id="dirtyword">
+        <one-of>
+            <item> 他X的</item>
+            <item> 去你X的</item>
+        </one-of>
+    </rule>
+    
+    <rule id="regularword">
+        <one-of>
+            <item>请问您要什么服务</item>
+            <item>谢谢您的来电</item>
+        </one-of>
+    </rule>
+    
+    <rule id="otherword">
+        <one-of>
+            <item>不能上网</item>
+            <item>服务态度很差</item>
+            <item>他X的</item>
+        </one-of>
+    </rule>
+    
+</grammar>
